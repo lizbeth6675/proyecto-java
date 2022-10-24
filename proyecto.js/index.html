@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html><head><title>Contratacion de enfermeras</title><meta charset="utf-8">
+
+<style type="text/css"> body {margin-left:30px; font-family: sans-serif;} h4 {margin:0;} div {float:left;}
+
+.estiloForm, #datos {background-color: #f3f3f3; border: solid 2px black; margin-left:10px; width:300px; }
+
+.estiloForm { width: 330px; padding:10px;} #datos {margin-top: 20px; height:250px; padding:10px;}
+
+.estiloForm label {display: block; width: 120px; float: left; text-align:right; margin-bottom: 35px; padding-right: 20px;}
+
+br {clear: left;} input[type="submit"], input[type="reset"] {margin:25px 5px 10px 5px;}
+
+</style>
+
+<script type="text/javascript">
+
+window.onload = function () {
+
+                casillaDatos = document.getElementById('datos'); 
+
+                radioButTrat = document.getElementsByName("genero"); 
+
+                checkboxElements = new Array();
+
+               
+
+                var elementosDelForm = document.getElementsByTagName('input');
+                var elementosSelect = document.getElementsByTagName('select');
+
+                for(var i=0; i<elementosDelForm.length;i++) {
+
+                if (elementosDelForm[i].type == 'radio') {elementosDelForm[i].addEventListener("click", actualizarDatos);}
+
+                else {elementosDelForm[i].addEventListener("change", actualizarDatos);}
+
+                if (elementosDelForm[i].type == 'checkbox') {checkboxElements.push(elementosDelForm[i]);}
+
+                }
+
+                for (var i=0; i<elementosSelect.length;i++) {elementosSelect[i].addEventListener("change", actualizarDatos);}
+
+}
+
+ 
+
+function actualizarDatos() {
+
+var radioButSelValue = '';
+
+for (var i=0; i<radioButTrat.length; i++) {if (radioButTrat[i].checked == true) { radioButSelValue= radioButTrat[i].value;} }
+
+if (radioButSelValue != ''){
+
+                if (radioButSelValue =='Mujer')
+
+                document.getElementById('encuadraImagen').style.background='url("'+rutaImagen+'") no-repeat';
+
+}
+
+var checkBoxSel = new Array();
+
+for (var i=0; i<checkboxElements.length;i++) {
+
+if (checkboxElements[i].checked ==true) {checkBoxSel.push(checkboxElements[i].name);}
+
+}
+var elementoTipodeServicio = document.getElementById('servicio1');
+var elementoDuraciondelServicio = document.getElementById('duracion1');
+var elementoHorasdelServicio = document.getElementById('horas1');
+
+
+casillaDatos.innerHTML='<h4> Datos introducidos: </h4><p>Genero: '+(radioButSelValue||' --- ')+'</p>'+
+
+'<p>Nombre Completo: '+document.getElementById('nombre').value+'</p>'+
+
+'<p>Dirección: ' +document.getElementById('direccion1').value+'</p>'+
+
+'<p>Tipo de Servicio: ' + (elementoTipodeServicio.options[elementoTipodeServicio.selectedIndex].text||' --- ')+'</p>'+
+
+'<p>Duracion del Servicio: ' + (elementoDuraciondelServicio.options[elementoDuraciondelServicio.selectedIndex].text||' --- ')+'</p>'+
+
+'<p>Horas del Servicio: ' + (elementoHorasdelServicio.options[elementoHorasdelServicio.selectedIndex].text||' --- ')+'</p>' +
+
+'<p>Correo Electronico: ' +document.getElementById('correo1').value+'</p>'
+
+}
+
+</script></head>
+
+<body><h1>CONTRATA ENFERMERAS Y ENFERMEROS A DOMICILIO</h1>
+
+    <div class="estiloForm">
+
+    <form name ="formularioContacto" method="get" action="#">
+
+        <label>Genero</label>
+
+        <input type="radio" name="genero" id="mujer1" value="mujer"/>Mujer
+
+        <input type="radio" name="genero" id ="hombre1" value="hombre"/>Hombre<br/>
+
+        <label>Nombre Completo</label><input id="nombre" name="nombre" type="text"/><br/>
+
+        <label>Dirección</label><input id="direccion1" name="direccion1" type="text"/><br/>
+
+        <label>Tipo de Servicio</label><select id="servicio1" name="servicio1">
+
+            <option value="">Elija opción</option>
+
+            <option value="Auxiliar">Auxiliar de Enfermeria</option>
+
+            <option value="Generl">Enfermero General</option>
+
+            <option value="Especialista">Enfermero Especialista </option>
+
+        </select><br/>
+
+        <label>Duracion del Servicio</label><select id="duracion1" name="duracion1">
+
+          <option value="">Elija opción</option>
+
+          <option value="Dias">De 1 a 7 dias</option>
+
+          <option value="Dias1">De 8 a 15 dias</option>
+
+          <option value="Dias2">De 15 a 21 sias</option>
+
+          <option value="Dias3">De 21 a 30 sias</option>
+
+      </select><br/>
+
+      <label>Horas del Servicio</label><select id="horas1" name="horas1">
+
+        <option value="">Elija opción</option>
+
+        <option value="Horas">Turno de 8hrs/$650</option>
+
+        <option value="Horas1">Turno de 12hrs/$800</option>
+
+        <option value="Horas2">Turno de 24hrs/$1500</option>
+
+    </select><br/>
+
+    <label>Correo Electronico</label><input id="correo1" name="correo1" type="text"/><br/>
+
+
+        <input type="submit" value="Enviar"/> <input type="reset" value="Cancelar"/>
+
+    </div>
+
+    <div style="float:left;">
+
+    <div id="encuadraImagen"></div><br/>
+
+    <div id="datos" style="float:left;"><h4> Datos introducidos: </h4></div>
+
+    </form>
+
+    </div>
+
+</body></html>
+
